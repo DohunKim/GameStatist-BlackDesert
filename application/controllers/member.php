@@ -3,6 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Member extends CI_Controller {
 
+	public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('session');
+		$this->load->model('user_model');
+		$this->load->helper('url');
+    }
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -30,15 +38,57 @@ class Member extends CI_Controller {
 	 * TODO: POST 페이지 작성 필요
 	 */
 	public function Login(){
-		$this->load->view('member/login');
+		if ($this->input->server('REQUEST_METHOD') == 'GET')
+		{
+			$this->load->view('member/login');
+		}
+		else
+		{
+			$user = $this->user_model->login($this->input->post('email'), $this->input->post('pwd'));
+			if($user !== null) {
+				//로긴 성공. 세션 데이터 추가 후 홈으로
+				// TODO: redirect url feature도 필요할 듯..
+				//echo $user->idMember.'<br/>'.$user->name;
+
+				$this->session->set_userdata('userIdx', $user->idMember);
+				$this->session->set_userdata('nickname', $user->name);
+				header("Location: /");
+			} else {
+				//실패했으니.. alert redirect 이용해서 조치 할 것
+				$data = array('errMsg' => '로그인에 실패하였습니다.');
+				$this->load->view('member/login',$data);
+			}
+		}
+	}
+
+	public function Logout()
+	{
+		$this->session->unset_userdata('userIdx');
+		$this->session->unset_userdata('nickname');
+		header("Location: /");
 	}
 	
 	/**
 	 * * 가입
 	 * TODO: POST process. email confirm is required
 	 */
-	public function Register(){
-		$this->load->view('member/register');
+	public function Register()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'GET')
+		{
+			$this->load->view('member/register');
+	
+		} else if ($this->input->server('REQUEST_METHOD') == 'POST')
+		{
+			if ($this->user_model->register($this->input->post('nickname'), $this->input->post('email'), $this->input->post('pwd')))
+				$this->load->view("alert_redirect",array('msg' => '회원가입이 완료되었습니다. 로그인해주세요.', 'url' => '/Member/Login'));
+			else
+				$this->load->view('member/forgotPassword');	
+		}
+	}
+
+	public function forgotPassword(){
+		$this->load->view('member/forgotPassword');
 	}
 
 	/**

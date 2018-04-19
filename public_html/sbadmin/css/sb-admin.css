@@ -5,6 +5,8 @@ html {
 
 body {
   overflow-x: hidden;
+  font-family: "Nanum Gothic";
+  font-size:0.9em;
 }
 
 body.sticky-footer {

@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('session');
+        $this->load->model('user_model');
+    }
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,8 +26,15 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('templates/header');
-		$this->load->view('welcome_message');
+        if (is_logged_in()) {
+            $data['nickname'] = $this->user_model->getNickname(getUserIdx());
+        } else {
+            //retrive user nickname from database.
+            $data['nickname'] = null;
+        }
+
+        $this->load->view('templates/header',$data);
+		$this->load->view('welcome_message',$data);
 		$this->load->view('templates/footer');
 	}
 }

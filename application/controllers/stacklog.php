@@ -28,7 +28,9 @@ class Stacklog extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-
+	/**
+	 * * 성공 로그를 보여주는 페이지. item 인덱스가 같이 오면 상세 페이지를, 없으면 홈페이지를
+	 */
 	public function success($item = 0)
 	{
 		$this->load->view('templates/header');
@@ -53,6 +55,9 @@ class Stacklog extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	/**
+	 * * 실패 로그를 보여주는 페이지. iten 인덱스가 같이 오면 상세 페이지를, ㅇ벗으면 홈페이지를
+	 */
 	public function fail($item = 0)
 	{
 		$this->load->view('templates/header');
@@ -78,6 +83,21 @@ class Stacklog extends CI_Controller {
 
 	}
 
+	/**
+	 * * 승인이 필요한 데이터를 보여주는 
+	 */
+	public function needApproval($page = 0)
+	{
+		$this->load->view('templates/header');
+		$this->load->view('stacklog/needApproval');
+		$this->load->view('templates/footer');
+
+	}
+
+	/**
+	 * * 스택 로그 등록
+	 * TODO: Youtube 링크, 이미지(Jpg, png, jpeg, gif). 이미지는 로테이션 값 지우고 자동으로 돌리는 코드 필요. for apple devices
+	 */
 	public function register($type)
 	{
 
@@ -110,5 +130,16 @@ class Stacklog extends CI_Controller {
 			$this->load->view("stacklog/registerComplete",$data);
 		}
 
+	}
+
+	/**
+	 * * 전체 통계 제공
+	 * TODO: 최근 핫한 아이템별 성공/실패 비교 및 아이템별 성공 스택, 실패 스택 추이
+	 */
+	public function statistics()
+	{
+		$this->load->view('templates/header');
+		$this->load->view('stacklog/statistics');
+		$this->load->view('templates/footer');
 	}
 }

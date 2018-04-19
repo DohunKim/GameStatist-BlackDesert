@@ -8,13 +8,13 @@
   <meta name="author" content="">
   <title>검은사막 스태티스트</title>
   <!-- Bootstrap core CSS-->
-  <link href="sbadmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/sbadmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
-  <link href="sbadmin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="/sbadmin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
-  <link href="sbadmin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/sbadmin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
-  <link href="sbadmin/css/sb-admin.css" rel="stylesheet">
+  <link href="/sbadmin/css/sb-admin.css" rel="stylesheet">
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->

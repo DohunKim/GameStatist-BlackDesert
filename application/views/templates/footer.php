@@ -30,19 +30,19 @@
       </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="sbadmin/vendor/jquery/jquery.min.js"></script>
-    <script src="sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/sbadmin/vendor/jquery/jquery.min.js"></script>
+    <script src="/sbadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
-    <script src="sbadmin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/sbadmin/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
-    <script src="sbadmin/vendor/chart.js/Chart.min.js"></script>
-    <script src="sbadmin/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="sbadmin/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/sbadmin/vendor/chart.js/Chart.min.js"></script>
+    <script src="/sbadmin/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/sbadmin/vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
-    <script src="sbadmin/js/sb-admin.min.js"></script>
+    <script src="/sbadmin/js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
-    <script src="sbadmin/js/sb-admin-datatables.min.js"></script>
-    <script src="sbadmin/js/sb-admin-charts.min.js"></script>
+    <script src="/sbadmin/js/sb-admin-datatables.min.js"></script>
+    <script src="/sbadmin/js/sb-admin-charts.min.js"></script>
 	<script>
 	$(document).ready(function() {
 		//setTimeout("blackclock()", 0); 

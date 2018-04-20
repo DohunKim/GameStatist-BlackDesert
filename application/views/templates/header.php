@@ -78,7 +78,7 @@
           </form>
         </li>
         <li class="nav-item">
-          <?php if($nickname === null) : ?>
+          <?php if(isset($nickname) == false) : ?>
           <a class="nav-link" href="/Member/Login">
             <i class="fa fa-fw fa-sign-in"></i>Login</a>
           <?php else : ?>

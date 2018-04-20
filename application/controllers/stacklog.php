@@ -3,6 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Stacklog extends CI_Controller {
 
+	public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('session');
+		$this->load->model('user_model');
+		
+		if (is_logged_in()) {
+            $this->data['nickname'] = $this->user_model->getNickname(getUserIdx());
+        } else {
+            //retrive user nickname from database.
+            $this->data['nickname'] = null;
+        }
+	}
+	private $data;
 	/**
 	 * Index Page for this controller.
 	 *
@@ -23,8 +37,9 @@ class Stacklog extends CI_Controller {
 		/**
 		 * TODO: 최근 데이터 추려서 보여주기. 핫한 데이터 보여주기(Trello 스택로그 코멘트 참고)
 		 */
-		$this->load->view('templates/header');
-		$this->load->view('stacklog/index');
+
+		$this->load->view('templates/header', $this->data);
+		$this->load->view('stacklog/index', $this->data);
 		$this->load->view('templates/footer');
 	}
 
@@ -33,7 +48,7 @@ class Stacklog extends CI_Controller {
 	 */
 	public function success($item = 0)
 	{
-		$this->load->view('templates/header');
+		$this->load->view('templates/header', $this->data);
 
 		/**
 		 * *아이템 인덱스가 같이 오면, 해당 아이템의 데이터를 보이고, 없으면 전체 데이터 중 최근 업데이트 된 내역 보여줌
@@ -60,7 +75,7 @@ class Stacklog extends CI_Controller {
 	 */
 	public function fail($item = 0)
 	{
-		$this->load->view('templates/header');
+		$this->load->view('templates/header', $this->data);
 
 		/**
 		 * *아이템 인덱스가 같이 오면, 해당 아이템의 데이터를 보이고, 없으면 전체 데이터 중 최근 업데이트 된 내역 보여줌
@@ -88,7 +103,7 @@ class Stacklog extends CI_Controller {
 	 */
 	public function needApproval($page = 0)
 	{
-		$this->load->view('templates/header');
+		$this->load->view('templates/header', $this->data);
 		$this->load->view('stacklog/needApproval');
 		$this->load->view('templates/footer');
 
@@ -100,20 +115,19 @@ class Stacklog extends CI_Controller {
 	 */
 	public function register($type)
 	{
-
 		if ($this->input->server('REQUEST_METHOD') == 'GET')
 		{
-			$data = array(
+			$this->data = array(
 				'type' => $type
 			);
 
-			$this->load->view('templates/header');
-			$this->load->view('stacklog/register', $data);
+			$this->load->view('templates/header', $this->data);
+			$this->load->view('stacklog/register', $this->data);
 			$this->load->view('templates/footer');
 	
 		} else if ($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$data = array(
+			$this->data = array(
 				'user_name' => $this->input->post('u_name'),
 				'user_email_id' => $this->input->post('u_email')
 				);
@@ -127,7 +141,7 @@ class Stacklog extends CI_Controller {
 				}
 				
 	
-			$this->load->view("stacklog/registerComplete",$data);
+			$this->load->view("stacklog/registerComplete",$this->data);
 		}
 
 	}
@@ -138,7 +152,7 @@ class Stacklog extends CI_Controller {
 	 */
 	public function statistics()
 	{
-		$this->load->view('templates/header');
+		$this->load->view('templates/header', $this->data);
 		$this->load->view('stacklog/statistics');
 		$this->load->view('templates/footer');
 	}
